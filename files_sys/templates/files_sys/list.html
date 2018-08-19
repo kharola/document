@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+
+{% block content %}
+
+<div class="container">
+  <h3>To upload doc and pdf files:</h3>
+  <strong><a href="{% url 'files_sys:model_form_upload' %}">Click Here</a></strong> <hr>
+</div>
+
+<div class="container">
+  <h3>User files:</h3>
+  <ul>
+    {% for obj in files %}
+      <li>
+        <strong>{{ obj.title }}</strong> <br>
+        <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
+        <small>(Uploaded at: {{ obj.uploaded_at }})</small><br>
+
+        <form class="" action="{% url 'files_sys:delete' pk=obj.id %}"> {% csrf_token %}
+            <input class='btn btn-danger' type="submit" value="Delete" />
+        </form>
+      </li><hr>
+    {% endfor %}
+  </ul>
+
+</div>
+  {% endblock %}

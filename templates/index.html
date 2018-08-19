@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+{% if user.is_authenticated %}
+    <h1>Welcome</h1>
+    <h3>To See list of doc and pdf </h3>
+    <h4><a href="{% url 'files_sys:list' %}">Click Here</a> </h4>
+{% endif %}
+
+
+{% if not user.is_authenticated %}
+  <h5>Login with Facebook</h5>
+ <form class="" action="{% url 'social:begin' 'facebook' %}">
+    <input type="submit"  value="Facebook">
+ </form>
+<hr>
+ <h5>Login with Google</h5>
+ <form class="" action="{% url 'social:begin' 'google-oauth2' %}">
+   <input type="submit"  value="Google">
+ </form>
+{% endif %}
+
+{% endblock %}
